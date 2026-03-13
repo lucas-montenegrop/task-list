@@ -2,6 +2,16 @@ import express from "express";
 const app = express();
 export default app;
 
+import taskRouter from "#api/tasks";
+import usersRouter from "#api/users";
+
+app.use(express.json());
+app.use(getUserFromToken());
+app.use("/tasks", taskRouter);
+app.use("/users", usersRouter);
+
+//TODO routes go here - make getUserById
+
 app.use((err, req, res, next) => {
   switch (err.code) {
     // Invalid type
